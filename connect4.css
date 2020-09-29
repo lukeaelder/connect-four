@@ -1,0 +1,136 @@
+/* game board table */
+
+#board td {
+  width: 50px;
+  height: 50px;
+  border: solid 1px #7c6f64;
+}
+
+/* pieces are div within game table cells: draw as colored circles */
+
+.piece {
+  margin: 5px;
+  width: 80%;
+  height: 80%;
+  border-radius: 100%;
+  animation-name: dropanimation;
+  animation-duration: 200ms;
+}
+
+/* TODO: make pieces red/blue,  depending on player 1/2 piece */
+.p1 {
+  background-color: #FF0000;
+}
+
+.p2 {
+  background-color: #0000FF;
+}
+/* column-top is table row of clickable areas for each column */
+
+#column-top td {
+  border: dashed 1px lightgray;
+}
+
+#column-top td:hover {
+  background-color: #fabd2f;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.topmenu {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  margin-bottom: 20px;
+  height: 30px;
+}
+
+.settingsbutton {
+  background-color: #83a598;
+  color: white;
+  margin-right: 10px;
+  width: 150px;
+  border: 2px solid #458588;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+.startbutton {
+  background-color: #fb4934;
+  color: white;
+  width: 120px;
+  border: 2px solid #cc241d;
+  border-radius: 5px;
+  font-size: 15px;
+}
+
+h1 {
+  color: white;
+  font-family: 'Dosis', sans-serif;
+  font-size: 50px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+body {
+  background-color: #282828;
+}
+
+@keyframes dropanimation {
+	from {
+		transform: translateY(-800%);
+	}
+	to {
+		transform: translateY(0px);
+	}
+}
+
+.boardwidth {
+  width: 150px;
+}
+
+.boardheight {
+  width: 150px;
+}
+
+.playercolors {
+  display: flex;
+  justify-content: center;
+}
+
+.settingsmenu {
+  display: grid;
+  justify-content: center;
+  visibility: hidden;
+  height: 0px;
+}
+
+.p1colorinput {
+  margin-right: 5px;
+  margin-left: 10px;
+}
+
+.p2colorinput {
+  margin-right: 10px;
+}
+
+p {
+  color: #d5c4a1;
+  margin: auto;
+}
+
+h3 {
+  font-size: 30px;
+  text-align: center;
+  font-family: 'Dosis', sans-serif;
+  color: #bdae93;
+  margin-top: 10px;
+  text-decoration: underline;
+  text-decoration-color: #bdae93;
+}
