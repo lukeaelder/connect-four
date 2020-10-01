@@ -27,19 +27,26 @@ function makeBoard() {
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
+const htmlBoard = document.getElementById('board');
+
 function makeHtmlBoard() {
-  const htmlBoard = document.getElementById('board');
+  appendTop();
+  appendRow();
+}
+
+function appendTop() {
   let top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
-
   for (let x = 0; x < WIDTH; x++) {
     let headCell = document.createElement("td");
     headCell.setAttribute("id", x);
     top.append(headCell);
   }
   htmlBoard.append(top);
+}
 
+function appendRow() {
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
@@ -69,9 +76,15 @@ function placeInTable(y, x) {
   const placement = document.getElementById(`${y}-${x}`)
   piece.classList.add('piece');
   piece.classList.add(`p${currPlayer}`);
-  currPlayer === 1 ? piece.style.backgroundColor = p1Color : piece.style.backgroundColor = p2Color;
-  currPlayer !== 1 ? document.querySelector('h3').style.textDecorationColor = p1Color : document.querySelector('h3').style.textDecorationColor = p2Color;
-  currPlayer === 1 ? document.querySelector('h3').innerText = `Player 2's Turn` : document.querySelector('h3').innerText = `Player 1's Turn`;
+  if (currPlayer === 1){
+    piece.style.backgroundColor = p1Color
+    document.querySelector('h3').style.textDecorationColor = p2Color
+    document.querySelector('h3').innerText = `Player 2's Turn`
+  } else {
+    piece.style.backgroundColor = p2Color
+    document.querySelector('h3').style.textDecorationColor = p1Color
+    document.querySelector('h3').innerText = `Player 1's Turn`
+  }
   placement.append(piece);
 }
 
@@ -155,7 +168,10 @@ function checkForWin() {
 document.querySelector('button[class=startbutton]').addEventListener('click', startGame);
 
 function startGame(){
-if (gamePlaying === false){
+ if ( gamePlaying === true && confirm('Are you sure you want to restart your current game?')){
+  gamePlaying = false;
+  startGame();
+}
   setSettings();
   board = [];
   currPlayer = 1;
@@ -165,12 +181,6 @@ if (gamePlaying === false){
   makeBoard();
   makeHtmlBoard();
   gamePlaying = true;
-} else {
-  if (confirm('Are you sure you want to restart your current game?')){
-    gamePlaying = false;
-    startGame();
-  }
-}
 }
 
 document.querySelector('button[class=settingsbutton]').addEventListener('click', openSettingsMenu);
